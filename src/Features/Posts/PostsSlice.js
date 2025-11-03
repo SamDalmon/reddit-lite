@@ -2,14 +2,13 @@ import { createAsyncThunk, createSlice }  from "@reduxjs/toolkit"
 
 export const fetchPostList = createAsyncThunk(
   "postsList/loadPostlist",
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const response = await fetch("https://www.reddit.com/r/popular.json"); 
       if (!response.ok){
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -20,36 +19,42 @@ export const fetchPostList = createAsyncThunk(
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {
-    isloadingPosts: false,
+    isLoadingPosts: false,
     failedToLoadPosts: false,
-    posts: []
+    posts: {}
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
       fetchPostList.pending, 
       (state) => {
-        state.isloadingPosts = true;
+        state.isLoadingPosts = true;
         state.failedToLoadPosts = false;
       }
     );
     builder.addCase(
       fetchPostList.rejected, 
       (state) => {
-        state.isloadingPosts = false;
-        state.failedToLoadPosts = false;
+        state.isLoadingPosts = false;
+        state.failedToLoadPosts = true;
       }
     );
     builder.addCase(
       fetchPostList.fulfilled, 
       (state, action) => {
-        state.isloadingPosts = false;
+        state.isLoadingPosts = false;
         state.failedToLoadPosts = false;
         state.posts = action.payload;
+        console.log("setting posts");
+        console.log(state.posts);
       }
     );
   }
 });
 
-export const postsReducer = postsSlice.reducer
+export const postsSelector = (state) => state.postsList.posts;
+export const postsLoadingSelector = (state) => state.postsList.isLoadingPosts;
+export const postsErrorSelector = (state) => state.postsList.failedToLoadPosts;
+export const postsReducer = postsSlice.reducer;
+
   
