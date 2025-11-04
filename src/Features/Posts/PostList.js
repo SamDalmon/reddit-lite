@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { fetchPostList, postsLoadingSelector, postsSelector, postsErrorSelector } from "./PostsSlice";
 import { useDispatch, useSelector } from "react-redux"
+import Post from "./Post.js"
 
 export default function PostList(){
   const dispatch = useDispatch();
@@ -19,14 +20,7 @@ export default function PostList(){
     } else if (failedLoadingPosts){
       return (<h1>Load Error!!!</h1>);
     } else {
-      return posts.map(({data})=>{
-        return (
-          <div key={data.id}>
-            <p>{data.title}</p>
-            <img src={data.thumbnail} alt={data.title}/>
-          </div>
-        )
-      })
+      return posts.map(({data})=> (<Post post={data}/>) )
     }
   }
 
