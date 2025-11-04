@@ -9,7 +9,7 @@ export const fetchPostList = createAsyncThunk(
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      return data;
+      return data.data.children;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -21,7 +21,7 @@ export const postsSlice = createSlice({
   initialState: {
     isLoadingPosts: false,
     failedToLoadPosts: false,
-    posts: {}
+    posts: []
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -45,8 +45,6 @@ export const postsSlice = createSlice({
         state.isLoadingPosts = false;
         state.failedToLoadPosts = false;
         state.posts = action.payload;
-        console.log("setting posts");
-        console.log(state.posts);
       }
     );
   }

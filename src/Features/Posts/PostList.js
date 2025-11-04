@@ -11,7 +11,6 @@ export default function PostList(){
 
   useEffect(()=>{
     dispatch(fetchPostList());
-    console.log("fetching posts");
   }, [dispatch]);
 
   function content() {
@@ -20,9 +19,14 @@ export default function PostList(){
     } else if (failedLoadingPosts){
       return (<h1>Load Error!!!</h1>);
     } else {
-      return (
-      <h1>Posts: {JSON.stringify(posts)}</h1>
-      )
+      return posts.map(({data})=>{
+        return (
+          <div key={data.id}>
+            <p>{data.title}</p>
+            <img src={data.thumbnail} alt={data.title}/>
+          </div>
+        )
+      })
     }
   }
 
