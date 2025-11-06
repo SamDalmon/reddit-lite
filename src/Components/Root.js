@@ -7,10 +7,7 @@ export default function Root() {
     return (
         <>
           <Header />
-          <main>
-            <PostList/>
-            <Outlet/>
-          </main>
+          <Outlet />
         </>
     )
 }

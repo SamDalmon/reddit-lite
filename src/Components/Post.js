@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Post({post}){
+export default function Post({post, handleClick}){
   const style = {
     backgroundColor: '#CCCCCC',
     margin: '10px 40px',
@@ -10,7 +10,7 @@ export default function Post({post}){
   };
 
   return (
-    <div style={style} key={post.id}>
+    <div style={style} key={post.id} onClick={() => handleClick(post.subreddit, post.id)}>
       <h2>{post.title}</h2>
       <img src={post.thumbnail} alt={post.title}/>
     </div>

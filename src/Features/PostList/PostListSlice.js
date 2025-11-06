@@ -6,7 +6,7 @@ export const fetchPostList = createAsyncThunk(
     try {
       const response = await fetch("https://www.reddit.com/r/popular.json"); 
       if (!response.ok){
-        throw new Error("Failed to fetch data");
+        throw new Error("Failed to fetch Post List");
       }
       const data = await response.json();
       return data.data.children;
@@ -17,7 +17,7 @@ export const fetchPostList = createAsyncThunk(
 );
 
 export const postsSlice = createSlice({
-  name: "posts",
+  name: "postList",
   initialState: {
     isLoadingPosts: false,
     failedToLoadPosts: false,
@@ -50,9 +50,9 @@ export const postsSlice = createSlice({
   }
 });
 
-export const postsSelector = (state) => state.postsList.posts;
-export const postsLoadingSelector = (state) => state.postsList.isLoadingPosts;
-export const postsErrorSelector = (state) => state.postsList.failedToLoadPosts;
+export const postsSelector = (state) => state.postList.posts;
+export const postsLoadingSelector = (state) => state.postList.isLoadingPosts;
+export const postsErrorSelector = (state) => state.postList.failedToLoadPosts;
 export const postsReducer = postsSlice.reducer;
 
   
