@@ -16,7 +16,7 @@ export const fetchPostList = createAsyncThunk(
   }
 );
 
-export const postsSlice = createSlice({
+export const postListSlice = createSlice({
   name: "postList",
   initialState: {
     isLoadingPosts: false,
@@ -53,6 +53,6 @@ export const postsSlice = createSlice({
 export const postsSelector = (state) => state.postList.posts;
 export const postsLoadingSelector = (state) => state.postList.isLoadingPosts;
 export const postsErrorSelector = (state) => state.postList.failedToLoadPosts;
-export const postsReducer = postsSlice.reducer;
+export const postListReducer = postListSlice.reducer;
 
   
