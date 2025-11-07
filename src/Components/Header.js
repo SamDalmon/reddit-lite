@@ -11,6 +11,7 @@ export default function Header(){
     <div style={{display: 'flex'}}>
       <img style={imageStyle} src={redditLogo} alt="Reddit Logo"></img>
       <h1>Reddit</h1>
+      {/*TODO: add ellement for searching*/}
     </div>
   )
 }
