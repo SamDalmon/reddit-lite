@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commentsSelector, detailFailedSelector, detailLoadingSelector, fetchPostDetail, thumbnailSelector, titleSelector } from "./PostDetailSlice";
 import { useParams } from "react-router-dom";
+import Comment from "../../Components/Comment";
 
 export default function PostDetail(){
   const { subreddit, id } = useParams();
@@ -25,7 +26,6 @@ export default function PostDetail(){
   }, [dispatch, id, subreddit]);
 
   function content() {
-    console.log(postLoading, loadFailed);
     if(postLoading){
       return (
         <>
@@ -56,9 +56,19 @@ export default function PostDetail(){
             <img src={thumbnail} alt={title}/>
           </div>
           <div style={style}>
-            <p>
-              {JSON.stringify(comments)}
-            </p>
+            <div>
+              {comments.map((comment) => {
+                  if(comment.data.author){
+                    return (<Comment 
+                      key={comment.data.id}
+                      author={comment.data.author}
+                      body={comment.data.body}
+                      replies={comment.data.replies}
+                    />)
+                  } else { return <></>}
+                })
+              }
+            </div>
           </div>
         </>
       );
