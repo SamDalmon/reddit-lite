@@ -19,9 +19,15 @@ export const fetchSearchResults = createAsyncThunk(
 export const searchResultsSlice = createSlice({
   name: fetchSearchResults,
   initialState: {
+    searchTerm: "",
     posts:[],
     isLoadingPosts: false,
     failedToLoadPosts: false, 
+  },
+  reducers: {
+    setSearchTerm(state, action){
+      state.searchTerm = action.payload;
+    }
   },
   extraReducers: (builder) => {
       builder.addCase(
@@ -53,3 +59,5 @@ export const searchReducer = searchResultsSlice.reducer;
 export const postsLoadingSelector = (state) => state.searchResult.isLoadingPosts;
 export const postsErrorSelector = (state) => state.searchResult.failedToLoadPosts;
 export const postsSelector = (state) => state.searchResult.posts
+export const searchTermSelector = (state) => state.searchResult.searchTerm
+export const { setSearchTerm } = searchResultsSlice.actions

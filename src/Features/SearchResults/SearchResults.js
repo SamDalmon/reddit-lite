@@ -11,7 +11,7 @@ export default function SearchResults(){
   const failedLoadingPosts = useSelector(postsErrorSelector)
   const posts = useSelector(postsSelector)
 
-  const location = useLocation
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search)
   const searchTerm = queryParams.get('query')
   
