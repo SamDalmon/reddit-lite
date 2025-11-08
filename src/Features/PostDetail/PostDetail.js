@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { commentsSelector, detailFailedSelector, detailLoadingSelector, fetchPostDetail, thumbnailSelector, titleSelector } from "./PostDetailSlice";
+import { commentsSelector, detailFailedSelector, detailLoadingSelector, fetchPostDetail, selfTextSelector, thumbnailSelector, titleSelector } from "./PostDetailSlice";
 import { useParams } from "react-router-dom";
 import Comment from "../../Components/Comment";
 
@@ -8,6 +8,7 @@ export default function PostDetail(){
   const { subreddit, id } = useParams();
   const dispatch = useDispatch();
   const title = useSelector(titleSelector);
+  const selftext = useSelector(selfTextSelector);
   const thumbnail = useSelector(thumbnailSelector);
   const comments = useSelector(commentsSelector);
   const postLoading = useSelector(detailLoadingSelector);
@@ -54,6 +55,7 @@ export default function PostDetail(){
           <div style={style}>
             <h1>{title}</h1>
             <img src={thumbnail} alt={title}/>
+            <p>{selftext}</p>
           </div>
           <div style={style}>
             <div>

@@ -26,6 +26,7 @@ export const postDetailSlice = createSlice ({
     postdetails: {},
     comments: [],
     title: "",
+    selftext: "",
     thumbnail: "",
     isloadingPost: false,
     failedToLoadPost: false,
@@ -54,6 +55,7 @@ export const postDetailSlice = createSlice ({
         state.postdetails = action.payload.post;
         state.comments = action.payload.comments;
         state.title = action.payload.post.title;
+        state.selftext = action.payload.post.selftext;
         state.thumbnail = action.payload.post.thumbnail;
       }
     )
@@ -62,6 +64,7 @@ export const postDetailSlice = createSlice ({
 
 export const titleSelector = (state) => state.postDetail.title;
 export const thumbnailSelector = (state) => state.postDetail.thumbnail;
+export const selfTextSelector = (state) => state.postDetail.selftext;
 export const commentsSelector = (state) => state.postDetail.comments;
 export const postDetailReducer = postDetailSlice.reducer;
 export const detailLoadingSelector = (state) => state.postDetail.isloadingPost;
