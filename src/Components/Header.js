@@ -5,6 +5,7 @@ import { searchTermSelector } from "../Features/SearchResults/SearchResultsSlice
 import { setSearchTerm } from "../Features/SearchResults/SearchResultsSlice";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import CategoryButtons from "./CategoryButtons";
 
 export default function Header(){
   const navigate = useNavigate()
@@ -46,6 +47,7 @@ export default function Header(){
           }}
         />
       </div>
+      <CategoryButtons />
     </div>
   )
 }
