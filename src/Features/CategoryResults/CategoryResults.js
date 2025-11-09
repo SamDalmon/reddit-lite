@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { categorySelector, fetchCategoriesResults, postsErrorSelector, postsLoadingSelector, postsSelector, setCategory } from "./CatergoriesResultsSlice";
+import { fetchCategoriesResults, postsErrorSelector, postsLoadingSelector, postsSelector, setCategory } from "./CatergoriesResultsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Post from "../../Components/Post.js";
 
 export default function CategoryResults(){

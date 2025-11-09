@@ -6,6 +6,7 @@ import { setSearchTerm } from "../Features/SearchResults/SearchResultsSlice";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import CategoryButtons from "./CategoryButtons";
+import { setCategory } from "../Features/CategoryResults/CatergoriesResultsSlice";
 
 export default function Header(){
   const navigate = useNavigate()
@@ -17,8 +18,13 @@ export default function Header(){
     height: '100px'
   }
   
-  function handleClick(){
-    console.log(`handle click ${searchTerm}`);
+  function homeClick(){
+    dispatch(setCategory(""));
+    navigate(`/`);
+  }
+
+  function handleSearchClick(){
+    dispatch(setCategory(""));
     if(searchTerm){
       navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
     } else {
@@ -29,8 +35,12 @@ export default function Header(){
   return (
     <div style={{padding: "0px 10px"}}>
       <div style={{display: 'flex'}}>
-        <img style={imageStyle} src={redditLogo} alt="Reddit Logo"></img>
-        <h1>Reddit</h1>
+        <img 
+          style={imageStyle} 
+          src={redditLogo} 
+          alt="Reddit Logo"
+          onClick={homeClick}></img>
+        <h1>Reddit Lite</h1>
       </div>
       <div style={{display: "flex", padding: '10px'}}>
         <input 
@@ -39,7 +49,7 @@ export default function Header(){
           value={searchTerm}
           onChange={(e)=>dispatch(setSearchTerm(e.target.value))}
         />
-        <FaSearch onClick={handleClick}/>
+        <FaSearch onClick={handleSearchClick}/>
         <FaTimes 
           onClick={()=>{
             dispatch(setSearchTerm(""));
