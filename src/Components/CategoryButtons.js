@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { categorySelector } from "../Features/CategoryResults/CatergoriesResultsSlice";
 
 export default function CategoryButtons(){
   const navigate = useNavigate();
-  const category = useSelector(categorySelector);
+  const { category } = useParams();
 
-  const [categories] = useState([
+  const [categories, setCategories ] = useState([
     {text: "Cute", value:"cute", selected: false},
     {text: "Funny", value:"funny", selected: false},
     {text: "Politics", value:"politics", selected: false},
@@ -15,10 +15,10 @@ export default function CategoryButtons(){
   ])
 
   useEffect(()=>{
-    categories.forEach((categoryObject, i)=>{
-      categories[i].selected = categoryObject.value === category;
-    })
-  },[categories, category])
+    setCategories(categories.map((categoryObject, i)=>{
+      return {...categoryObject, selected: categoryObject.value === category};
+    }))
+  },[category])
 
   function handleClick(category) {
     navigate(`/post/${category}`);
