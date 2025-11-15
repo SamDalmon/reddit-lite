@@ -20,6 +20,7 @@ export default function Header(){
   
   function homeClick(){
     dispatch(setCategory(""));
+    dispatch(setSearchTerm(""));
     navigate(`/`);
   }
 
@@ -49,12 +50,13 @@ export default function Header(){
           value={searchTerm}
           onChange={(e)=>dispatch(setSearchTerm(e.target.value))}
         />
-        <FaSearch onClick={handleSearchClick}/>
+        <FaSearch 
+          onClick={handleSearchClick}
+          data-testid="searchButton"
+        />
         <FaTimes 
-          onClick={()=>{
-            dispatch(setSearchTerm(""));
-            navigate('/');
-          }}
+          onClick={homeClick}
+          data-testid="crossButton"
         />
       </div>
       <CategoryButtons />
