@@ -10,7 +10,7 @@ export default function Post({post, handleClick}){
   };
 
   return (
-    <div style={style} key={post.id} onClick={() => handleClick(post.subreddit, post.id)}>
+    <div role="main" style={style} key={post.id} onClick={() => handleClick(post.subreddit, post.id)}>
       <h2>{post.title}</h2>
       <img src={post.thumbnail} alt={post.title}/>
     </div>
