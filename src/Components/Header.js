@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import CategoryButtons from "./CategoryButtons";
 import { setCategory } from "../Features/CategoryResults/CatergoriesResultsSlice";
 
-export default function Header(){
+function Header(){
   const navigate = useNavigate()
   const searchTerm = useSelector(searchTermSelector);
   const dispatch = useDispatch();
@@ -63,3 +63,5 @@ export default function Header(){
     </div>
   )
 }
+
+export default Header;
