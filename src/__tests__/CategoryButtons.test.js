@@ -4,7 +4,10 @@ import CategoryButtons from "../Components/CategoryButtons";
 import { Provider } from "react-redux";
 import { initilizeStore } from "../store";
 import categoryList from "../res/categoryList";
+import Root from "../Components/Root";
 import Header from "../Components/Header";
+import Home from "../Components/Home";
+import CategoryResults from "../Features/CategoryResults/CategoryResults";
 import userEvent from "@testing-library/user-event";
 import { mockNavigate, MemoryRouter, Route, Routes } from "react-router-dom";
 import { wait } from "@testing-library/user-event/dist/utils";
@@ -39,33 +42,33 @@ it("Category buttons should render correctly", ()=>{
 });
 
 it("Category button should highlight and change url when pressed", async ()=>{
-  mockNavigate.mockClear();
+  
 
-  const firstCategory = categoryList[0];
+
+  mockNavigate.mockClear();
+  const selectedCategory = categoryList[2];
   /*<Route path="/post/:category" element={<Header />}/>*/
   
   render(
-    <MemoryRouter initialEntries={[`/post/cute`]}>
+    <MemoryRouter initialEntries={[`/post/${selectedCategory.value}`]}>
       <Provider store={store}>
         <Routes>
-          <Route path="/post/:category" element={<Header />} />
+          <Route path="/post/:category" element={ <Header /> } />
         </Routes>
       </Provider>
     </MemoryRouter>
   );
+  
+  let selectedButton = screen.getByText(selectedCategory.text);
+  userEvent.click(selectedButton);
+  expect(mockNavigate).toHaveBeenCalledWith(`/post/${selectedCategory.value}`);
 
-  
-  const firstButton = screen.getByText(firstCategory.text);
-  expect(firstButton).toHaveStyle({backgroundColor: 'blue'});
-  userEvent.click(firstButton);
-
-  expect(mockNavigate).toHaveBeenCalledWith(`/post/${firstCategory.value}`);
-  
- 
-  /*
-  await waitFor(()=>{
-    expect(firstButton).toHaveStyle({backgroundColor: 'blue'});
-  }, {timeout: 3000});
-  */
-  
+  categoryList.forEach((category)=>{
+    const checkButton = screen.getByText(category.text);
+    let bgColor = "gray";
+    if(category === selectedCategory){
+      bgColor = "blue";
+    }
+    expect(checkButton).toHaveStyle({backgroundColor: bgColor});
+  })  
 })
