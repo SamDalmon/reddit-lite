@@ -25,7 +25,7 @@ export default function CategoryButtons(){
   }
 
   return (
-    <div style={{display: "flex"}}>
+    <div role="main" style={{display: "flex"}}>
       {categories.map((category) => {
         const color = category.selected ? "blue": "gray";
         return (
