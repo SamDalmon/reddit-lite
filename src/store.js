@@ -14,3 +14,14 @@ const store = configureStore({
 });
 
 export default store;
+
+export const initilizeStore = () => {
+  return configureStore({
+    reducer: {
+      postList: postListReducer,
+      postDetail: postDetailReducer,
+      searchResult: searchReducer,
+      categoryResults: categoryResultReducer,
+    }
+  })
+}
