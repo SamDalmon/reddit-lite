@@ -4,7 +4,9 @@ export const fetchPostList = createAsyncThunk(
   "postsList/loadPostlist",
   async (_, thunkAPI) => {
     try {
-      const response = await fetch("https://www.reddit.com/r/popular.json"); 
+      const response = await fetch("https://www.reddit.com/r/popular.json", {
+        headers: {"User-Agent": "reddit-lite/0.1 by SamDalmon"}
+      }); 
       if (!response.ok){
         throw new Error("Failed to fetch Post List");
       }

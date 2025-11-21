@@ -1,6 +1,7 @@
 import React from "react";
+import "./Components.css"
 
-export default function Post({post, handleClick}){
+export default function Post({post, handleClick, className=""}){
   const style = {
     backgroundColor: '#CCCCCC',
     margin: '10px 40px',
@@ -10,7 +11,7 @@ export default function Post({post, handleClick}){
   };
 
   return (
-    <div role="main" style={style} key={post.id} onClick={() => handleClick(post.subreddit, post.id)}>
+    <div className="fade-in" role="main" style={style} key={post.id} onClick={() => handleClick(post.subreddit, post.id)}>
       <h2>{post.title}</h2>
       <img src={post.thumbnail} alt={post.title}/>
     </div>

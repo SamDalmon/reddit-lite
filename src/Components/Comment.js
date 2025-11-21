@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Components.css"
 
 export default function Comment({author, body, replies}){
   const style = {
@@ -27,7 +28,7 @@ export default function Comment({author, body, replies}){
   }
 
   return (
-    <div style={style}>
+    <div className='collapsible' style={style}>
       <h2>{author}</h2>
       <>{body}</>
       {replyList()}

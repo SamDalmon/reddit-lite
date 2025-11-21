@@ -1,0 +1,45 @@
+.page {
+  /* play an enter animation automatically on mount */
+  animation: pageEnter 1s cubic-bezier(.2,.8,.2,1) both;
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .page { animation: none; transform: none; opacity: 1; }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.collapsible {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 1;
+  transition: max-height 5s cubic-bezier(.2,.8,.2,1), opacity 250ms ease;
+  /* automatically expand on load */
+  animation: expandMax 5s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes expandMax {
+  from { max-height: 0; opacity: 1; }
+  to   { max-height: 800px; opacity: 1; } /* 800px is a chosen upper bound */
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .collapsible { animation: none; transition: none; max-height: none; opacity: 1; }
+}
